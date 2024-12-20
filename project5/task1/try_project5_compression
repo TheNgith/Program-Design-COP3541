@@ -1,0 +1,32 @@
+# Written by Jing Wang for Program Design
+# This is a Unix shell script that will be used to test project 4.
+# To use the script, unzip the folder, copy this file and the tests folder 
+# into the same directory as your scource file
+# Set execute permission for the file by issuing the command:
+# chmod +x try_project5_compression
+# Compile your program, producing a.out as the executable
+# To run the script, type 
+# ./try_project5_compression
+# The user input from the script will not be shown on the screen.
+# Compare the results from your program with the expected results on the test cases.
+for i in {1..5}; do
+	echo -e '\033[0;31m====================================================\033[0m'
+	echo -e '\033[0;31mTest case #'${i}'\033[0m'
+	echo -e '\033[0;31m====================================================\033[0m'
+	./a.out < ./tests/$i.in > ./$i.out
+	if [[ $(diff -w ./$i.out ./tests/$i.out) == "" ]]; then
+		echo -e '\033[0;31mCorrect!\033[0m'
+	else
+		echo -e '\033[0;31mOutput:\033[0m'
+		cat ./$i.out
+		echo
+		echo -e '\033[0;31m----------------------------------------------------\033[0m'
+		echo -e '\033[0;31mExpected output:\033[0m'
+		cat ./tests/$i.out
+		echo
+		echo -e '\033[0;31m----------------------------------------------------\033[0m'
+		echo -e '\033[0;31mDifference:\033[0m'
+		diff -w ./tests/$i.out ./$i.out
+	fi
+	echo -e '\033[0;31m====================================================\033[0m'
+done

@@ -1,0 +1,26 @@
+# Written by Jing Wang 
+# This is a Unix shell script that will be used to test project 6.
+# To use the script, copy it into the same directory as your scource file
+# Set execute permission for the file by issuing the command:
+# chmod +x try_project6_decode
+# Compile your program, producing a.out as the executable
+# To run the script, type 
+# ./try_project6_decode
+# The user input from the script will not be shown on the screen.
+# Compare the results from your program with the expected results on the test cases.
+for i in {1..4}; do
+	echo '===================================================='
+	echo "Test case #$i"
+	echo '===================================================='
+	cp ./tests/animals.txt .
+	./a.out < ./tests/$i.in >./$i.out 
+	echo 'Difference:'
+	if [[ $(diff -w ./tests/$i.out ./results.txt) == "" ]]; then
+		echo "*** Correct! ***"
+	else
+		diff -w ./tests/$i.out ./results.txt
+	fi
+	echo '===================================================='
+	echo
+done
+
